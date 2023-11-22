@@ -1,0 +1,2430 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documentação CPSGUI</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            line-height: 2rem;
+            text-align: justify;
+            font-size: 1.1rem;
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        #container {
+            display: flex;
+        }
+
+        #content {
+            margin: 1rem;
+            margin-right: 2rem;
+            max-width: 70vw;
+        }
+
+        #summary {
+            position: absolute;
+            left: 0;
+            top: 0;
+            margin: 1rem 2rem;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding-top: 0;
+        }
+
+        #summary>ul {
+            position: fixed;
+            max-height: 75vh;
+            overflow: scroll;
+            margin: 0;
+            padding: 0 0.4rem;
+            padding-right: 1rem;
+            background-color: rgba(0, 0, 0, 0.1);
+        }
+
+        #summary>ul>li>a>h2 {
+            margin-top: 0;
+        }
+
+        #summary>ul>li>a {
+            color:black;
+            text-decoration: none;
+        }
+
+        pre {
+            max-width: 74vw;
+            max-height: 84vh;
+            overflow: scroll;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 1rem;
+            line-height: normal;
+            background-color: whitesmoke;
+            padding: 5px;
+            color: rgb(0, 0, 0);
+            border-width: 2px;
+            border-color: black;
+            border-style: solid;
+        }
+
+        .tab {
+            padding-left: 4rem;
+        }
+
+        .summary-1 {
+            font-size: 1.2rem;
+            font-weight: bold;
+        }
+
+        .summary-2 {
+            font-size: 1rem;
+            padding-left: 1.5rem;
+            font-weight: bold;
+        }
+
+        .summary-3 {
+            font-size: 1rem;
+            padding-left: 2.5rem;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .functions {
+            color:black;
+            text-decoration-line: underline;
+        }
+
+        .function-div {
+            padding-left: 2rem;
+        }
+    </style>
+
+</head>
+
+<body>
+    <h1>Documentação da API CPSGUI</h1>
+    <div id="container">
+        <div id="summary">
+            <h2 style="position: fixed; min-height: 2rem;">Sumário</h2>
+            <br>
+            <br>
+            <br>
+            <ul>
+                <li>
+                    <a href="#introduction">
+                        <span class="summary-1">Introdução</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#differences">
+                        <span class="summary-1">Diferenças entre CLI e GUI</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#window">
+                    <span class="summary-1">Janela</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#window-functions">
+                    <span class="summary-2">Funções de janela</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#events">
+                    <span class="summary-1">Eventos</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#components">
+                    <span class="summary-1">Componentes</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#static-text">
+                    <span class="summary-1">Texto estático</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#static-text-functions">
+                    <span class="summary-2">Funções de texto estático</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#text-field">
+                    <span class="summary-1">Campo de texto</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#text-field-functions">
+                    <span class="summary-2">Funções de campo de texto</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#button">
+                    <span class="summary-1">Botão</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#button-functions">
+                    <span class="summary-2">Funções de botão</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#rectangle">
+                    <span class="summary-1">Retângulo</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#rectangle-functions">
+                    <span class="summary-2">Funções de retângulo</span>
+                </a>
+                </li>
+                <li>
+                    <a href="#line">
+                    <span class="summary-1">Linha</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#line-functions">
+                    <span class="summary-2">Funções de linha</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#tips">
+                    <span class="summary-1">Dicas</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#functions">
+                    <span class="summary-1">Funções</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#functions-window">
+                    <span class="summary-2">Janela</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#createWindow">
+                    <span class="summary-3">createWindow</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setWindowTitle">
+                    <span class="summary-3">setWindowTitle</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#destroyWindow">
+                    <span class="summary-3">destroyWindow</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#functions-static-text">
+                    <span class="summary-2">Texto estático</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#createStaticText">
+                    <span class="summary-3">createStaticText</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#destroyStaticText">
+                    <span class="summary-3">destroyStaticText</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setStaticText">
+                    <span class="summary-3">setStaticText</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setStaticTextX">
+                    <span class="summary-3">setStaticTextX</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setStaticTextY">
+                    <span class="summary-3">setStaticTextY</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setStaticTextWidth">
+                    <span class="summary-3">setStaticTextWidth</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setStaticTextHeight">
+                    <span class="summary-3">setStaticTextHeight</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setStaticTextColor">
+                    <span class="summary-3">setStaticTextColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getStaticText">
+                    <span class="summary-3">getStaticText</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getStaticTextX">
+                    <span class="summary-3">getStaticTextX</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getStaticTextY">
+                    <span class="summary-3">getStaticTextY</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getStaticTextHeight">
+                    <span class="summary-3">getStaticTextHeight</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getStaticTextColor">
+                    <span class="summary-3">getStaticTextColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#functions-text-field">
+                    <span class="summary-2">Campo de texto</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#createTextField">
+                    <span class="summary-3">createTextField</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#destroyTextField">
+                    <span class="summary-3">destroyTextField</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setTextFieldX">
+                    <span class="summary-3">setTextFieldX</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setTextFieldY">
+                    <span class="summary-3">setTextFieldY</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setTextFieldWidth">
+                    <span class="summary-3">setTextFieldWidth</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setTextFieldHeight">
+                    <span class="summary-3">setTextFieldHeight</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setTextFieldColor">
+                    <span class="summary-3">setTextFieldColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setTextFieldText">
+                    <span class="summary-3">setTextFieldText</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setTextFieldTextColor">
+                    <span class="summary-3">setTextFieldTextColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getTextFieldX">
+                    <span class="summary-3">getTextFieldX</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getTextFieldY">
+                    <span class="summary-3">getTextFieldY</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getTextFieldWidth">
+                    <span class="summary-3">getTextFieldWidth</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getTextFieldHeight">
+                    <span class="summary-3">getTextFieldHeight</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getTextFieldColor">
+                    <span class="summary-3">getTextFieldColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getTextFieldText">
+                    <span class="summary-3">getTextFieldText</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getTextFieldTextColor">
+                    <span class="summary-3">getTextFieldTextColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#functions-button">
+                    <span class="summary-2">Botão</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#createButton">
+                    <span class="summary-3">createButton</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#destroyButton">
+                    <span class="summary-3">destroyButton</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setButtonX">
+                    <span class="summary-3">setButtonX</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setButtonY">
+                    <span class="summary-3">setButtonY</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setButtonWidth">
+                    <span class="summary-3">setButtonWidth</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setButtonHeight">
+                    <span class="summary-3">setButtonHeight</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setButtonColor">
+                    <span class="summary-3">setButtonColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setButtonText">
+                    <span class="summary-3">setButtonText</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setButtonTextColor">
+                    <span class="summary-3">setButtonTextColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getButtonX">
+                    <span class="summary-3">getButtonX</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getButtonY">
+                    <span class="summary-3">getButtonY</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getButtonWidth">
+                    <span class="summary-3">getButtonWidth</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getButtonHeight">
+                    <span class="summary-3">getButtonHeight</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getButtonColor">
+                    <span class="summary-3">getButtonColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getButtonText">
+                    <span class="summary-3">getButtonText</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getButtonTextColor">
+                    <span class="summary-3">getButtonTextColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#functions-rectangle">
+                    <span class="summary-2">Retângulo</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#createRectangle">
+                    <span class="summary-3">createRectangle</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#destroyRectangle">
+                    <span class="summary-3">destroyRectangle</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setRectangleX">
+                    <span class="summary-3">setRectangleX</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setRectangleY">
+                    <span class="summary-3">setRectangleY</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setRectangleWidth">
+                    <span class="summary-3">setRectangleWidth</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setRectangleHeight">
+                    <span class="summary-3">setRectangleHeight</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setRectangleColor">
+                    <span class="summary-3">setRectangleColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getRectangleX">
+                    <span class="summary-3">getRectangleX</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getRectangleY">
+                    <span class="summary-3">getRectangleY</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getRectangleWidth">
+                    <span class="summary-3">getRectangleWidth</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getRectangleHeight">
+                    <span class="summary-3">getRectangleHeight</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getRectangleColor">
+                    <span class="summary-3">getRectangleColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#line">
+                    <span class="summary-2">Linha</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#createLine">
+                    <span class="summary-3">createLine</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#destroyLine">
+                    <span class="summary-3">destroyLine</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setLineX0">
+                    <span class="summary-3">setLineX0</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setLineY0">
+                    <span class="summary-3">setLineY0</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setLineX1">
+                    <span class="summary-3">setLineX1</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setLineY1">
+                    <span class="summary-3">setLineY1</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#setLineColor">
+                    <span class="summary-3">setLineColor</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getLineX0">
+                    <span class="summary-3">getLineX0</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getLineY0">
+                    <span class="summary-3">getLineY0</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getLineX1">
+                    <span class="summary-3">getLineX1</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getLineY1">
+                    <span class="summary-3">getLineY1</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#getLineColor">
+                    <span class="summary-3">getLineColor</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+        <div id="content">
+            <h2 id="introduction">Introdução</h2>
+            <p><span class="tab"></span> A API CPSGUI é uma API de interface gráfica para uso de estudantes iniciantes em programação e visa a ser
+                fácil
+                o
+                suficiente para tarefas como criar uma janela e alguns componentes simples.</p>
+            <p><span class="tab"></span>CPSGUI é uma sigla para Cross-Platform Simple Graphical User Interface, ou seja, Interface Gráfica de
+                Usuário
+                Simples MultiPlataforma. Isso porque a API oculta detalhes específicos do sistema operacional, podendo
+                ser
+                implementada em diferentes sistemas. Atualmente, ela tem implementações para Windows e Linux.</p>
+            <p><span class="tab"></span>O funcionamento da API é baseado em eventos. Isso significa que haverá um laço de repetição que
+                constantemente
+                espera novos eventos e que os trata quando os recebe. Os eventos existentes na API são o evento de
+                clique de
+                botão e de pressionamento de tecla. Um evento de clique de botão é recebido quando o usuário clica em um
+                botão.
+            </p>
+
+            <h2 id="differences">Diferenças entre CLI e GUI</h2>
+            <p><span class="tab"></span>Um programa com interface de linha de comando (CLI - Command Line Interface), ou seja, baseado em texto e
+                digitação com o teclado, possui diferenças fundamentais de interface de usuário em relação a um programa
+                com
+                interface gráfica de usuário (GUI - Graphical User Interface). Em uma interface baseada em texto, o
+                programador
+                possui controle sobre o que o usuário fará no momento. Se, por exemplo, o programador precisa do nome do
+                usuário
+                para prosseguir, basta exibir algo como “Digite seu nome:”, e o usuário poderá inserir o seu nome. Em
+                uma
+                interface gráfica de usuário, contudo, o usuário decide o que irá fazer e em que momento. Se há, por
+                exemplo, um
+                formulário com diversos campos, o usuário poderá preencher o segundo campo antes do primeiro ou
+                vice-versa.
+                Além
+                disso, no caso de um formulário, é natural que sejam preenchidos todos os campos e então clicado em um
+                botão
+                ao
+                final. Após esse clique, todas as informações provavelmente serão coletadas de uma vez só,
+                diferentemente do
+                que
+                aconteceria em um programa baseado em texto.</p>
+            <p><span class="tab"></span>Tendo em vista as particularidades de uma interface gráfica de usuário, fica clara a necessidade de uma
+                forma
+                diferente de programar a interação com o usuário. A forma utilizada na API CPSGUI é a programação
+                baseada em
+                eventos. Basicamente, isso consiste na constante leitura por ações do usuário e uma tomada de decisão de
+                acordo
+                com a ação realizada. Na programação de interfaces baseadas em texto é comum haver menus de opções,
+                listando
+                as
+                ações possíveis ao usuário e solicitando um número ou letra de acordo com o menu desejado. Para isso, é
+                utilizado um laço de repetição e uma estrutura de decisão. A ideia da programação baseada em eventos é
+                virtualmente a mesma. O laço de repetição também serve para evitar que o programa simplesmente termine,
+                pois
+                sem
+                um laço de repetição o programa chegaria ao ponto de retorno.</p>
+            <p><span class="tab"></span>A conversão da interface de usuário de um programa baseado em texto para uma interface gráfica é mais
+                simples
+                ou
+                mais complexa, dependendo de como o programa original foi estruturado. Programas com boa modularidade
+                tendem
+                a
+                ser mais fáceis de converter. Se existem funções que implementam apenas as regras de negócio do programa
+                e
+                que
+                não interagem diretamente com o usuário, a conversão é relativamente simples. Essencialmente, é
+                necessário
+                transformar as leituras de dados em campos de texto, as escritas de dados em campos de texto estático e
+                as
+                escolhas e/ou confirmações (apertar “Enter” para indicar o término da entrada seria um exemplo de
+                confirmação)
+                em botões. O programa deveria, então, constantemente obter eventos, que representam as ações do usuário,
+                e
+                executar o código relativo à ação realizada.</p>
+            <p><span class="tab"></span>O código a seguir mostra um exemplo de obtenção de dados de campos de texto a partir do clique em um
+                botão.</p>
+            <pre class="code">
+#include "build/API.h"
+int main() {
+    Window window = createWindow("Formulário", 0, 0, 510, 160, rgb(255, 255, 255));
+    StaticText labelNome = createStaticText(window, 10, 10, 100, 20, 0, "Nome");
+    TextField entradaNome = createTextField(window, 10, 30, 100, 30, rgb(107, 107, 107), "", 0);
+    StaticText labelIdade = createStaticText(window, 10, 70, 100, 20, 0, "Idade");
+    TextField entradaIdade = createTextField(window, 10, 90, 100, 30, rgb(107, 107, 107), "", 0);
+    Button botaoConfirmar = createButton(window, 10, 130, 100, 20, rgb(107, 0, 100), "Confirmar", rgb(0, 0, 0), 0);
+
+    while (1) {
+        Event event = getEvent(window);
+        if (event.type == CLICK_EVENT) {
+            switch (event.data) {
+            case 0:
+            {
+                char nome[50];
+                char idade[5];
+                getTextFieldText(entradaNome, nome);
+                getTextFieldText(entradaIdade, idade);
+            }
+            break;
+            default:
+            break;
+            }
+        }
+    }
+    return 0;
+}</pre>
+        <p><span class="tab"></span>No exemplo acima são criados vários componentes, incluindo um botão.
+        O botão recebe o número 0 como identificador. No laço de eventos é tratado o evento de clique em botão, e quando o botão com identificador 0 é clicado os dados do campos de texto são guardados nas variáveis nome e idade.</p>
+        <h2 id="window">Janela</h2>
+        <p><span class="tab"></span>A criação de janela é feita com a função <b>createWindow</b> e destruída com a função <b>destroyWindow</b>. O título da janela pode ser alterado usando a função setWindowTitle. Atualmente, a API suporta apenas uma única janela de tamanho fixo.</p>
+        <h3 id="window-functions">Funções de janela</h3>
+        <ul>
+            <li>
+                <a href="#createWindow">
+                <span class="functions">createWindow</span>
+                </a>
+            </li>
+            <li>
+                <a href="#setWindowTitle">
+                <span class="functions">setWindowTitle</span>
+                </a>
+            </li>
+            <li>
+                <a href="#destroyWindow">
+                <span class="functions">destroyWindow</span>
+                </a>
+            </li>
+        </ul>
+        <p>
+            <span class="tab"></span>O exemplo abaixo ilustra a utilização das funções acima.
+        </p>
+        <pre>#include "build/API.h"
+int main() {
+    Window window = createWindow("Exemplo", 10, 10, 500, 400, rgb(255, 100, 100));
+    setWindowTitle(window, "Novo título");
+    Button button = createButton(window, 20, 20, 100, 20, rgb(255, 255, 255), "Fechar", rgb(0, 0, 0), 0);
+    while (1) {
+    Event event = getEvent(window);
+    if (event.type == CLICK_EVENT) {
+        switch (event.data) {
+        case 0:
+            destroyWindow(window);
+            return 0;
+        break;
+        default:
+        break;
+        }
+    }
+    }
+    return 0;
+}</pre>
+    <p>
+        <span class="tab"></span>Nesse exemplo, é criada uma janela, seu título é alterado imediatamente após a criação, e a janela é destruída quando o usuário clica no botão com identificador 0 (botão chamado “Fechar”, nesse caso).
+    </p>
+    <h2 id="events">Eventos</h2>
+    <p><span class="tab"></span>Os eventos podem ser obtidos com a função <b>getEvent</b>. O evento consiste em uma estrutura de dado composta por um tipo (membro “type”) e um dado (membro “data”). O evento de clique de botão (CLICK_EVENT) tem no membro “data” o identificador do botão que foi clicado. Virtualmente toda a aplicação terá um laço de repetição que constantemente lê eventos, como no exemplo abaixo.</p>
+<pre>while (1) {
+    Event event = getEvent(window);
+    if (event.type == CLICK_EVENT) {
+      switch (event.data) {
+      case 0:
+        {
+          char nome[50];
+          char idade[5];
+          getTextFieldText(entradaNome, nome);
+          getTextFieldText(entradaIdade, idade);
+        }
+        break;
+      default:
+        break;
+      }
+    }
+}</pre>
+    <p><span class="tab"></span>Esse exemplo apenas obtém o texto de campos de texto, mas aplicações reais terão maior quantidade de lógica dentro do laço.</p>
+    <h2 id="components">Componentes</h2>
+
+    <p><span class="tab"></span>A API possui os seguintes componentes: <b>texto estático</b>, <b>campo de texto</b>, <b>botão</b>, <b>retângulo</b> e <b>linha</b>.</p>
+    <p><span class="tab"></span>O <b>texto estático</b> consiste em texto que pode ser exibido e alterado pelo programa, mas não é editável pelo usuário. Esse tipo de componente serve para informar o usuário em relação a resultados ou para descrever o propósito de algum componente adjascente. O propósito é similar à função printf, da biblioteca padrão da linguagem C, mas é importante lembrar que o componente de texto estático não é capaz de formatar dados, diferentemente da função printf.</p>
+    <p><span class="tab"></span>O <b>campo de texto</b> consiste em uma caixa em que o usuário pode digitar texto. O programa tem a possibilidade de ler e alterar o conteúdo desse componente, mas é mais comum que apenas se leia o que o usuário digitou. Para que o usuário possa digitar algo no campo de texto, ele deve primeiro clicar sobre o componente. Atualmente, a API apenas suporta a inserção de caracteres e a remoção de caracteres com a tecla “Backspace”. Esse tipo de componente serve para que o usuário possa realizar inserção de dados. O propósito é similar à função scanf, da biblioteca padrão da linguagem C, mas é importante lembrar que o componente de campo de texto não é capaz de formatar dados, diferentemente da função scanf.</p>
+    <p><span class="tab"></span>O <b>botão</b> consiste em uma caixa contendo texto que pode ser clicada pelo usuário. Na API, cada botão possui um identificador, especificado pelo programador, que serve para informar qual botão foi clicado em um evento de clique de botão (ver seção “Eventos”). Diferentemente do campo de texto, o botão não serve, geralmente, para informar dados, mas sim para solicitar que o programa realize uma ação. Em certo sentido, o botão é similar a pressionar a tecla “Enter”, ou ainda similar a escolher uma opção por meio de um caractere específico dentre uma lista de opções, em uma interface baseada em texto.</p>
+    <p><span class="tab"></span>O <b>retângulo</b> consiste em caixa preenchida por uma cor sólida, que não tem interação com o usuário. O retângulo é uma forma geométrica bastante verstátil, portanto pode ser utilizado em diversos contextos, mas nesta API um uso possível é servir como plano de fundo para um texto estático. Basta criar um retângulo e após texto estático em algum lugar que o sobreponha, e haverá essencialmente texto estático com um plano de fundo.</p>
+    <p><span class="tab"></span>A <b>linha</b> consiste em uma linha de 1 pixel de largura traçada de qualquer ponto da janela até qualquer outro ponto da janela. Por também se tratar de uma forma geométrica versátil, pode ser utilizada de diversas formas, mas um uso possível na API é servir como separador de seções ou de conteúdo.</p>
+    <h2 id="static-text">Texto estático</h2>
+    <p><span class="tab"></span>O texto estático é chamado de <b>StaticText</b> e pode ser criado com a função <b>createStaticText</b> e destruído com a função <b>destroyStaticText</b>. Suas propriedades podem ser obtidas através das funções do tipo getStaticText&ltpropriedade&gt e alteradas através das funções do tipo setStaticText&ltpropriedade&gt.</p>
+    <h3 id="static-text-functions">Funções de texto estático</h3>
+    <ul>
+        <li>
+            <a href="#createStaticText">
+            <span class="functions">createStaticText</span>
+            </a>
+        </li>
+        <li>
+            <a href="#destroyStaticText">
+            <span class="functions">destroyStaticText</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setStaticText">
+            <span class="functions">setStaticText</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setStaticTextX">
+            <span class="functions">setStaticTextX</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setStaticTextY">
+            <span class="functions">setStaticTextY</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setStaticTextWidth">
+            <span class="functions">setStaticTextWidth</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setStaticTextHeight">
+            <span class="functions">setStaticTextHeight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setStaticTextColor">
+            <span class="functions">setStaticTextColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getStaticText">
+            <span class="functions">getStaticText</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getStaticTextX">
+            <span class="functions">getStaticTextX</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getStaticTextY">
+            <span class="functions">getStaticTextY</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getStaticTextHeight">
+            <span class="functions">getStaticTextHeight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getStaticTextColor">
+            <span class="functions">getStaticTextColor</span>
+            </a>
+        </li>
+    </ul>
+    <p>
+        <span class="tab"></span>O código abaixo mostra um exemplo de utilização de texto estático.
+    </p>
+<pre>#include "build/API.h"
+
+int main() {
+    Window window = createWindow("Formulário", 0, 0, 510, 160, rgb(255, 255, 255));
+    StaticText labelNome = createStaticText(window, 10, 10, 100, 20, 0, "Nome");
+    TextField entradaNome = createTextField(window, 10, 30, 100, 30, rgb(107, 107, 107), "", 0);
+    StaticText labelIdade = createStaticText(window, 10, 70, 100, 20, 0, "Idade");
+    TextField entradaIdade = createTextField(window, 10, 90, 100, 30, rgb(107, 107, 107), "", 0);
+    Button botaoConfirmar = createButton(window, 10, 130, 100, 20, rgb(107, 0, 100), "Confirmar", rgb(0, 0, 0), 0);
+
+    while (1) {
+    Event event = getEvent(window);
+    if (event.type == CLICK_EVENT) {
+        switch (event.data) {
+        case 0:
+        {
+            char nome[50];
+            char idade[5];
+            getTextFieldText(entradaNome, nome);
+            getTextFieldText(entradaIdade, idade);
+        }
+        break;
+        default:
+        break;
+        }
+    }
+    }
+    return 0;
+}</pre>
+    <p><span class="tab"></span>A imagem abaixo corresponde à janela resultante desse código.</p>
+    <img src="data:image/png;base64,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dFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA0LjQuMC1FeGl2MiI+CiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiCiAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICB4bWxuczpHSU1QPSJodHRwOi8vd3d3LmdpbXAub3JnL3htcC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgeG1wTU06RG9jdW1lbnRJRD0iZ2ltcDpkb2NpZDpnaW1wOjk1YmNmOGM0LTIyN2EtNDQ4OC05MTA1LWQ5MDZmY2RmOTEyZSIKICAgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2ODFkOTgxOS1hM2NmLTRjNzItODk1ZS1mNzUwZmI0MjliMWYiCiAgIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMWJhMWYxMy03NTE1LTQ4Y2MtOTA0OC1hZjE1NWM0MjM1MzYiCiAgIGRjOkZvcm1hdD0iaW1hZ2UvcG5nIgogICBHSU1QOkFQST0iMi4wIgogICBHSU1QOlBsYXRmb3JtPSJMaW51eCIKICAgR0lNUDpUaW1lU3RhbXA9IjE2OTk4ODg1NDcwOTMyODgiCiAgIEdJTVA6VmVyc2lvbj0iMi4xMC4zMCIKICAgdGlmZjpPcmllbnRhdGlvbj0iMSIKICAgeG1wOkNyZWF0b3JUb29sPSJHSU1QIDIuMTAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJzYXZlZCIKICAgICAgc3RFdnQ6Y2hhbmdlZD0iLyIKICAgICAgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo0Yjg1MWQ0YS05ZjNmLTRkNTMtODlhYi1kOWUxOWY1ZjY0OWYiCiAgICAgIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkdpbXAgMi4xMCAoTGludXgpIgogICAgICBzdEV2dDp3aGVuPSIyMDIzLTExLTEzVDEyOjE1OjQ3LTAzOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/PteavlMAAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfnCw0PDy9lOg79AAANC0lEQVR42u3de5CddWHH4e97djdXYEMCucjFXEiKgCQQDdUUSytQS4erTGlRtJ1BiiYjijCtMKUdkYtIEYdQ6XCJF1CE4WIV/yhgixSLASSoUG7JUhLIBhIQkrC57Xn7R9i42exuzibZ7EnyPDMZ2HPe855zXth83t/vfd9ziqeffrosyzLVajXVajWrVq3KW2+9lba2tqxduzbVajUd95dlmSQpy3Ljn46fO+v6MwDQd0VR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"/>
+    <h2 id="text-field">Campo de texto</h2>
+    <p>
+        <span class="tab"></span>O campo de texto é chamado de <b>TextField</b> e pode ser criado com a função <b>createTextField</b> e destruído com a função <b>destroyTextField</b>. Suas propriedades podem ser obtidas através das funções do tipo getTextField&ltpropriedade&gt e alteradas através das funções do tipo setTextField&ltpropriedade&gt.
+    </p>
+    <h3 id="text-field-functions">Funções de campo de texto</h3>
+    <ul>
+        <li>
+            <a href="#createTextField">
+            <span class="functions">createTextField</span>
+            </a>
+        </li>
+        <li>
+            <a href="#destroyTextField">
+            <span class="functions">destroyTextField</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setTextFieldX">
+            <span class="functions">setTextFieldX</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setTextFieldY">
+            <span class="functions">setTextFieldY</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setTextFieldWidth">
+            <span class="functions">setTextFieldWidth</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setTextFieldHeight">
+            <span class="functions">setTextFieldHeight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setTextFieldColor">
+            <span class="functions">setTextFieldColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setTextFieldText">
+            <span class="functions">setTextFieldText</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setTextFieldTextColor">
+            <span class="functions">setTextFieldTextColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getTextFieldX">
+            <span class="functions">getTextFieldX</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getTextFieldY">
+            <span class="functions">getTextFieldY</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getTextFieldWidth">
+            <span class="functions">getTextFieldWidth</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getTextFieldHeight">
+            <span class="functions">getTextFieldHeight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getTextFieldColor">
+            <span class="functions">getTextFieldColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getTextFieldText">
+            <span class="functions">getTextFieldText</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getTextFieldTextColor">
+            <span class="functions">getTextFieldTextColor</span>
+            </a>
+        </li>
+    </ul>
+    <p><span class="tab"></span>O código abaixo mostra um exemplo de utilização de campo de texto.</p>
+    <pre>#include "build/API.h"
+
+int main() {
+    Window window = createWindow("Formulário", 0, 0, 510, 160, rgb(255, 255, 255));
+    StaticText labelNome = createStaticText(window, 10, 10, 100, 20, 0, "Nome");
+    TextField entradaNome = createTextField(window, 10, 30, 100, 30, rgb(107, 107, 107), "", 0);
+    StaticText labelIdade = createStaticText(window, 10, 70, 100, 20, 0, "Idade");
+    TextField entradaIdade = createTextField(window, 10, 90, 100, 30, rgb(107, 107, 107), "", 0);
+    Button botaoConfirmar = createButton(window, 10, 130, 100, 20, rgb(107, 0, 100), "Confirmar", rgb(0, 0, 0), 0);
+
+    while (1) {
+    Event event = getEvent(window);
+    if (event.type == CLICK_EVENT) {
+        switch (event.data) {
+        case 0:
+        {
+            char nome[50];
+            char idade[5];
+            getTextFieldText(entradaNome, nome);
+            getTextFieldText(entradaIdade, idade);
+        }
+        break;
+        default:
+        break;
+        }
+    }
+    }
+    return 0;
+}</pre>
+    <p><span class="tab"></span>A imagem abaixo corresponde à janela resultante desse código.</p>
+    <img src="data:image/png;base64,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dFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA0LjQuMC1FeGl2MiI+CiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiCiAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICB4bWxuczpHSU1QPSJodHRwOi8vd3d3LmdpbXAub3JnL3htcC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgeG1wTU06RG9jdW1lbnRJRD0iZ2ltcDpkb2NpZDpnaW1wOjk1YmNmOGM0LTIyN2EtNDQ4OC05MTA1LWQ5MDZmY2RmOTEyZSIKICAgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2ODFkOTgxOS1hM2NmLTRjNzItODk1ZS1mNzUwZmI0MjliMWYiCiAgIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMWJhMWYxMy03NTE1LTQ4Y2MtOTA0OC1hZjE1NWM0MjM1MzYiCiAgIGRjOkZvcm1hdD0iaW1hZ2UvcG5nIgogICBHSU1QOkFQST0iMi4wIgogICBHSU1QOlBsYXRmb3JtPSJMaW51eCIKICAgR0lNUDpUaW1lU3RhbXA9IjE2OTk4ODg1NDcwOTMyODgiCiAgIEdJTVA6VmVyc2lvbj0iMi4xMC4zMCIKICAgdGlmZjpPcmllbnRhdGlvbj0iMSIKICAgeG1wOkNyZWF0b3JUb29sPSJHSU1QIDIuMTAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJzYXZlZCIKICAgICAgc3RFdnQ6Y2hhbmdlZD0iLyIKICAgICAgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo0Yjg1MWQ0YS05ZjNmLTRkNTMtODlhYi1kOWUxOWY1ZjY0OWYiCiAgICAgIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkdpbXAgMi4xMCAoTGludXgpIgogICAgICBzdEV2dDp3aGVuPSIyMDIzLTExLTEzVDEyOjE1OjQ3LTAzOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/PteavlMAAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfnCw0PDy9lOg79AAANC0lEQVR42u3de5CddWHH4e97djdXYEMCucjFXEiKgCQQDdUUSytQS4erTGlRtJ1BiiYjijCtMKUdkYtIEYdQ6XCJF1CE4WIV/yhgixSLASSoUG7JUhLIBhIQkrC57Xn7R9i42exuzibZ7EnyPDMZ2HPe855zXth83t/vfd9ziqeffrosyzLVajXVajWrVq3KW2+9lba2tqxduzbVajUd95dlmSQpy3Ljn46fO+v6MwDQd0VR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"/>
+    <h2 id="button">Botão</h2>
+    <p><span class="tab"></span>O botão é chamado de <b>Button</b> e pode ser criado com a função <b>createButton</b> e destruído com a função <b>destroyButton</b>. Suas propriedades podem ser obtidas através das funções do tipo getButton&ltPropriedade&gt e alteradas através das funções do tipo setButton&ltPropriedade&gt.</p>
+    <h3 id="button-functions">Funções de botão</h3>
+    <ul>
+        <li>
+            <a href="#createButton">
+            <span class="functions">createButton</span>
+            </a>
+        </li>
+        <li>
+            <a href="#destroyButton">
+            <span class="functions">destroyButton</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setButtonX">
+            <span class="functions">setButtonX</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setButtonY">
+            <span class="functions">setButtonY</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setButtonWidth">
+            <span class="functions">setButtonWidth</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setButtonHeight">
+            <span class="functions">setButtonHeight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setButtonColor">
+            <span class="functions">setButtonColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setButtonText">
+            <span class="functions">setButtonText</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setButtonTextColor">
+            <span class="functions">setButtonTextColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getButtonX">
+            <span class="functions">getButtonX</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getButtonY">
+            <span class="functions">getButtonY</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getButtonWidth">
+            <span class="functions">getButtonWidth</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getButtonHeight">
+            <span class="functions">getButtonHeight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getButtonColor">
+            <span class="functions">getButtonColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getButtonText">
+            <span class="functions">getButtonText</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getButtonTextColor">
+            <span class="functions">getButtonTextColor</span>
+            </a>
+        </li>
+    </ul>
+    <p><span class="tab"></span>O código abaixo mostra um exemplo de utilização de botão.</p>
+    <pre>#include "build/API.h"
+int main() {
+    Window window = createWindow("Formulário", 0, 0, 510, 160, rgb(255, 255, 255));
+    StaticText labelNome = createStaticText(window, 10, 10, 100, 20, 0, "Nome");
+    TextField entradaNome = createTextField(window, 10, 30, 100, 30, rgb(107, 107, 107), "", 0);
+    StaticText labelIdade = createStaticText(window, 10, 70, 100, 20, 0, "Idade");
+    TextField entradaIdade = createTextField(window, 10, 90, 100, 30, rgb(107, 107, 107), "", 0);
+    Button botaoConfirmar = createButton(window, 10, 130, 100, 20, rgb(107, 0, 100), "Confirmar", rgb(0, 0, 0), 0);
+
+    while (1) {
+    Event event = getEvent(window);
+    if (event.type == CLICK_EVENT) {
+        switch (event.data) {
+        case 0:
+        {
+            char nome[50];
+            char idade[5];
+            getTextFieldText(entradaNome, nome);
+            getTextFieldText(entradaIdade, idade);
+        }
+        break;
+        default:
+        break;
+        }
+    }
+    }
+    return 0;
+}</pre>
+    <p><span class="tab"></span>A imagem abaixo corresponde à janela resultante desse código.</p>
+    <img src="data:image/png;base64,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dFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA0LjQuMC1FeGl2MiI+CiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiCiAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICB4bWxuczpHSU1QPSJodHRwOi8vd3d3LmdpbXAub3JnL3htcC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgeG1wTU06RG9jdW1lbnRJRD0iZ2ltcDpkb2NpZDpnaW1wOjk1YmNmOGM0LTIyN2EtNDQ4OC05MTA1LWQ5MDZmY2RmOTEyZSIKICAgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDo2ODFkOTgxOS1hM2NmLTRjNzItODk1ZS1mNzUwZmI0MjliMWYiCiAgIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDoyMWJhMWYxMy03NTE1LTQ4Y2MtOTA0OC1hZjE1NWM0MjM1MzYiCiAgIGRjOkZvcm1hdD0iaW1hZ2UvcG5nIgogICBHSU1QOkFQST0iMi4wIgogICBHSU1QOlBsYXRmb3JtPSJMaW51eCIKICAgR0lNUDpUaW1lU3RhbXA9IjE2OTk4ODg1NDcwOTMyODgiCiAgIEdJTVA6VmVyc2lvbj0iMi4xMC4zMCIKICAgdGlmZjpPcmllbnRhdGlvbj0iMSIKICAgeG1wOkNyZWF0b3JUb29sPSJHSU1QIDIuMTAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJzYXZlZCIKICAgICAgc3RFdnQ6Y2hhbmdlZD0iLyIKICAgICAgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo0Yjg1MWQ0YS05ZjNmLTRkNTMtODlhYi1kOWUxOWY1ZjY0OWYiCiAgICAgIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkdpbXAgMi4xMCAoTGludXgpIgogICAgICBzdEV2dDp3aGVuPSIyMDIzLTExLTEzVDEyOjE1OjQ3LTAzOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/PteavlMAAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfnCw0PDy9lOg79AAANC0lEQVR42u3de5CddWHH4e97djdXYEMCucjFXEiKgCQQDdUUSytQS4erTGlRtJ1BiiYjijCtMKUdkYtIEYdQ6XCJF1CE4WIV/yhgixSLASSoUG7JUhLIBhIQkrC57Xn7R9i42exuzibZ7EnyPDMZ2HPe855zXth83t/vfd9ziqeffrosyzLVajXVajWrVq3KW2+9lba2tqxduzbVajUd95dlmSQpy3Ljn46fO+v6MwDQd0VR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"/>
+    <h2 id="rectangle">Retângulo</h2>
+    <p><span class="tab"></span>O retângulo é chamado de <b>Rectangle</b> e pode ser criado com a função <b>createRectangle</b> e destruído com a função <b>destroyRectangle</b>. Suas propriedades podem ser obtidas através das funções do tipo getRectangle&ltpropriedade&gt e alteradas através das funções do tipo setRectangle&ltpropriedade&gt.</p>
+    <h3 id="rectangle-functions">Funções de retângulo</h3>
+    <ul>
+        <li>
+            <a href="#createRectangle">
+            <span class="functions">createRectangle</span>
+            </a>
+        </li>
+        <li>
+            <a href="#destroyRectangle">
+            <span class="functions">destroyRectangle</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setRectangleX">
+            <span class="functions">setRectangleX</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setRectangleY">
+            <span class="functions">setRectangleY</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setRectangleWidth">
+            <span class="functions">setRectangleWidth</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setRectangleHeight">
+            <span class="functions">setRectangleHeight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setRectangleColor">
+            <span class="functions">setRectangleColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getRectangleX">
+            <span class="functions">getRectangleX</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getRectangleY">
+            <span class="functions">getRectangleY</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getRectangleWidth">
+            <span class="functions">getRectangleWidth</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getRectangleHeight">
+            <span class="functions">getRectangleHeight</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getRectangleColor">
+            <span class="functions">getRectangleColor</span>
+            </a>
+        </li>
+    </ul>
+    <p><span class="tab"></span>O código abaixo mostra um exemplo de utilização de retângulo.</p>
+    <pre>#include "build/API.h"
+
+int main() {
+    Window window = createWindow("Exemplo", 0, 0, 420, 160, rgb(255, 255, 255));
+    Rectangle rectangle1 = createRectangle(window, 10, 10, 400, 50, rgb(50, 100, 150));
+    Rectangle rectangle2 = createRectangle(window, 10, 100, 400, 50, rgb(50, 100, 150));
+    Line line1 = createLine(window, 10, 60, 410, 100, rgb(255, 0, 0));
+    Line line2 = createLine(window, 10, 100, 410, 60, rgb(255, 0, 0));
+
+    while (1) {
+    Event event = getEvent(window);
+    if (event.type == CLICK_EVENT) {
+        switch (event.data) {
+        default:
+        break;
+        }
+    }
+    }
+    return 0;
+}</pre>
+    <p><span class="tab"></span>A imagem abaixo corresponde à janela resultante desse código.</p>
+    <img src="data:image/png;base64,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4x7+IccvkUshVxmMHAuoQoXs+MH/4He3ZmFywk0KxIHuF9v+GAF6doFm3ba/j227eQL4n4Erre2vNoCZT9LrbS16BIS2gYvrtqbsAZc7wOCTLhuyI/lpCoUC8H5G35QFBm6BvjW3t9Y+Th+ANHWVvAEODoHRImWve7y7t7O3f8+0+vsBZC9yoVsX4iUAAA0aaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA0LjQuMC1FeGl2MiI+CiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiCiAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICB4bWxuczpHSU1QPSJodHRwOi8vd3d3LmdpbXAub3JnL3htcC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgeG1wTU06RG9jdW1lbnRJRD0iZ2ltcDpkb2NpZDpnaW1wOjY1OGUxNjdkLTEzMWYtNDdjNS05YzA3LTUzOThjNmY4ODAzMCIKICAgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpjZTRmN2U2MS04YmRkLTQ5NWQtOTdlNS1mNjg2NjNiN2VjNmEiCiAgIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjOWQ0ZjFiYy0wZTM1LTQ3MmQtYTZkYi1jZTM2M2Y2OWNmMjciCiAgIGRjOkZvcm1hdD0iaW1hZ2UvcG5nIgogICBHSU1QOkFQST0iMi4wIgogICBHSU1QOlBsYXRmb3JtPSJMaW51eCIKICAgR0lNUDpUaW1lU3RhbXA9IjE2OTk4ODk0NTY4MDE5NjciCiAgIEdJTVA6VmVyc2lvbj0iMi4xMC4zMCIKICAgdGlmZjpPcmllbnRhdGlvbj0iMSIKICAgeG1wOkNyZWF0b3JUb29sPSJHSU1QIDIuMTAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJzYXZlZCIKICAgICAgc3RFdnQ6Y2hhbmdlZD0iLyIKICAgICAgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo5MDI3MGVmZi0yMzczLTQ4MzEtYWM4Yy1iODM2YzE4MTc4ZTciCiAgICAgIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkdpbXAgMi4xMCAoTGludXgpIgogICAgICBzdEV2dDp3aGVuPSIyMDIzLTExLTEzVDEyOjMwOjU2LTAzOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/PvCOB24AAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfnCw0PHji1MKgqAAAL0klEQVR42u3deZSV9WHH4e+9M2wiDjLIUpewCE0UFYKi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" />
+    <h2 id="line">Linha</h2>
+    <p><span class="tab"></span>A linha é chamada de <b>Line</b> e pode ser criada com a função <b>createLine</b> e destruída com a função <b>destroyLine</b>. Suas propriedades podem ser obtidas através das funções do tipo getLine&ltpropriedade&gt e alteradas através das funções do tipo setLine&ltpropriedade&gt.</p>
+    <h3 id="line-functions">Funções de linha</h3>
+    <ul>
+        <li>
+            <a href="#createLine">
+            <span class="functions">createLine</span>
+            </a>
+        </li>
+        <li>
+            <a href="#destroyLine">
+            <span class="functions">destroyLine</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setLineX0">
+            <span class="functions">setLineX0</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setLineY0">
+            <span class="functions">setLineY0</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setLineX1">
+            <span class="functions">setLineX1</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setLineY1">
+            <span class="functions">setLineY1</span>
+            </a>
+        </li>
+        <li>
+            <a href="#setLineColor">
+            <span class="functions">setLineColor</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getLineX0">
+            <span class="functions">getLineX0</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getLineY0">
+            <span class="functions">getLineY0</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getLineX1">
+            <span class="functions">getLineX1</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getLineY1">
+            <span class="functions">getLineY1</span>
+            </a>
+        </li>
+        <li>
+            <a href="#getLineColor">
+            <span class="functions">getLineColor</span>
+            </a>
+        </li>
+    </ul>
+    <p><span class="tab"></span>O código abaixo mostra um exemplo de utilização de linha.</p>
+<pre>#include "build/API.h"
+
+int main() {
+    Window window = createWindow("Exemplo", 0, 0, 420, 160, rgb(255, 255, 255));
+    Rectangle rectangle1 = createRectangle(window, 10, 10, 400, 50, rgb(50, 100, 150));
+    Rectangle rectangle2 = createRectangle(window, 10, 100, 400, 50, rgb(50, 100, 150));
+    Line line1 = createLine(window, 10, 60, 410, 100, rgb(255, 0, 0));
+    Line line2 = createLine(window, 10, 100, 410, 60, rgb(255, 0, 0));
+
+    while (1) {
+    Event event = getEvent(window);
+    if (event.type == CLICK_EVENT) {
+        switch (event.data) {
+        default:
+        break;
+        }
+    }
+    }
+    return 0;
+}</pre>
+    <p><span class="tab"></span>A imagem abaixo corresponde à janela resultante desse código.</p>
+    <img src="data:image/png;base64,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4x7+IccvkUshVxmMHAuoQoXs+MH/4He3ZmFywk0KxIHuF9v+GAF6doFm3ba/j227eQL4n4Erre2vNoCZT9LrbS16BIS2gYvrtqbsAZc7wOCTLhuyI/lpCoUC8H5G35QFBm6BvjW3t9Y+Th+ANHWVvAEODoHRImWve7y7t7O3f8+0+vsBZC9yoVsX4iUAAA0aaVRYdFhNTDpjb20uYWRvYmUueG1wAAAAAAA8P3hwYWNrZXQgYmVnaW49Iu+7vyIgaWQ9Ilc1TTBNcENlaGlIenJlU3pOVGN6a2M5ZCI/Pgo8eDp4bXBtZXRhIHhtbG5zOng9ImFkb2JlOm5zOm1ldGEvIiB4OnhtcHRrPSJYTVAgQ29yZSA0LjQuMC1FeGl2MiI+CiA8cmRmOlJERiB4bWxuczpyZGY9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkvMDIvMjItcmRmLXN5bnRheC1ucyMiPgogIDxyZGY6RGVzY3JpcHRpb24gcmRmOmFib3V0PSIiCiAgICB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIKICAgIHhtbG5zOnN0RXZ0PSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvc1R5cGUvUmVzb3VyY2VFdmVudCMiCiAgICB4bWxuczpkYz0iaHR0cDovL3B1cmwub3JnL2RjL2VsZW1lbnRzLzEuMS8iCiAgICB4bWxuczpHSU1QPSJodHRwOi8vd3d3LmdpbXAub3JnL3htcC8iCiAgICB4bWxuczp0aWZmPSJodHRwOi8vbnMuYWRvYmUuY29tL3RpZmYvMS4wLyIKICAgIHhtbG5zOnhtcD0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wLyIKICAgeG1wTU06RG9jdW1lbnRJRD0iZ2ltcDpkb2NpZDpnaW1wOjY1OGUxNjdkLTEzMWYtNDdjNS05YzA3LTUzOThjNmY4ODAzMCIKICAgeG1wTU06SW5zdGFuY2VJRD0ieG1wLmlpZDpjZTRmN2U2MS04YmRkLTQ5NWQtOTdlNS1mNjg2NjNiN2VjNmEiCiAgIHhtcE1NOk9yaWdpbmFsRG9jdW1lbnRJRD0ieG1wLmRpZDpjOWQ0ZjFiYy0wZTM1LTQ3MmQtYTZkYi1jZTM2M2Y2OWNmMjciCiAgIGRjOkZvcm1hdD0iaW1hZ2UvcG5nIgogICBHSU1QOkFQST0iMi4wIgogICBHSU1QOlBsYXRmb3JtPSJMaW51eCIKICAgR0lNUDpUaW1lU3RhbXA9IjE2OTk4ODk0NTY4MDE5NjciCiAgIEdJTVA6VmVyc2lvbj0iMi4xMC4zMCIKICAgdGlmZjpPcmllbnRhdGlvbj0iMSIKICAgeG1wOkNyZWF0b3JUb29sPSJHSU1QIDIuMTAiPgogICA8eG1wTU06SGlzdG9yeT4KICAgIDxyZGY6U2VxPgogICAgIDxyZGY6bGkKICAgICAgc3RFdnQ6YWN0aW9uPSJzYXZlZCIKICAgICAgc3RFdnQ6Y2hhbmdlZD0iLyIKICAgICAgc3RFdnQ6aW5zdGFuY2VJRD0ieG1wLmlpZDo5MDI3MGVmZi0yMzczLTQ4MzEtYWM4Yy1iODM2YzE4MTc4ZTciCiAgICAgIHN0RXZ0OnNvZnR3YXJlQWdlbnQ9IkdpbXAgMi4xMCAoTGludXgpIgogICAgICBzdEV2dDp3aGVuPSIyMDIzLTExLTEzVDEyOjMwOjU2LTAzOjAwIi8+CiAgICA8L3JkZjpTZXE+CiAgIDwveG1wTU06SGlzdG9yeT4KICA8L3JkZjpEZXNjcmlwdGlvbj4KIDwvcmRmOlJERj4KPC94OnhtcG1ldGE+CiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgCiAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAKICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgIAogICAgICAgICAgICAgICAgICAgICAgICAgICAKPD94cGFja2V0IGVuZD0idyI/PvCOB24AAAAGYktHRAD/AP8A/6C9p5MAAAAJcEhZcwAACxMAAAsTAQCanBgAAAAHdElNRQfnCw0PHji1MKgqAAAL0klEQVR42u3deZSV9WHH4e+9M2wiDjLIUpewCE0UFYKi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" />
+    <h2 id="tips">Dicas</h2>
+    <p><span class="tab"></span>A cor é definida pela macro rgb(r, g, b). RGB é um esquema de cores que descreve um total de 2^24 cores por meio de combinações de três números de 0 a 255, sendo o primeiro a quantidade de vermelho, o segundo a quantidade de verde, e o terceiro a quantidade de azul. Naturalmente, existem ferramentas para escolher cores e obter seus valores no esquema RGB. Para isso, basta pesquisar em um motor de busca por “color picker”.</p>
+    <p><span class="tab"></span>Diferentemente das funções disponíveis para programas baseados em texto, a API não possui em si a possibilidade de formatar dados, seja em leitura ou em escrita. Contudo, é possível utilizar as funções sprintf e sscanf, que funcionam como as funções printf e scanf, mas recebem ponteiros para strings para usar como base para a operação, ao invés dos arquivos padrões de entrada e saída. Por meio dessas funções é possível, por exemplo, ler um número em formato de string obtido de um campo de texto e transformá-lo em um inteiro ou valor de ponto flutuante utilizando a função sscanf.</p>
+    <p><span class="tab"></span>A API não possui um índice Z explícito, ou seja, não há como explicitamente especificar qual componente deve estar na frente de qual. Contudo, a API trata as janelas que foram criadas primeiro como as que devem estar mais atrás, e as que foram criadas depois como as que devem estar mais à frente.</p>
+    <h2 id="functions">Funções</h2>
+    <h3 id="functions-window">Janela</h3>
+    <h4 id="createWindow">createWindow</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>Window createWindow(char *title, unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned long color)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>char *<b>title</b>: String terminada em 0 que será o título exibido na janela</li>
+            <li>unsigned int <b>x</b>: Inteiro sem sinal que representa a distância da janela em relação à esquerda da tela, em pixels</li>
+                <li>unsigned int <b>y</b>: Inteiro sem sinal que representa a distância da janela em relação ao topo da tela, em pixels</li>
+                    <li>unsigned int <b>width</b>: Inteiro sem sinal que representa a largura da janela, em pixels</li>
+                        <li>unsigned int <b>height</b>: Inteiro sem sinal que representa a altura da janela, em pixels</li>
+                            <li>unsigned long <b>color</b>: Inteiro sem sinal que representa a cor de fundo da janela. Veja a seção de dicas para como especificar cores</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna, de forma abstrata, a janela criada. A janela é essencialmente um ponteiro para uma estrutura utilizada internamente pela API. Essa referência para a janela é usada em quase todas as outras funções da API.
+        </p>
+        </div>
+    </div>
+    <h4 id="setWindowTitle">setWindowTitle</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setWindowTitle(Window window, char *title)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: A janela cujo título será alterado</li>
+            <li>char *<b>title</b>: String terminada em 0 que será o novo título exibido na janela</li>
+        </ul>
+    </div>
+    <h4 id="destroyWindow">destroyWindow</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void destroyWindow(Window window)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: A janela a ser destruída</li>
+        </ul>
+        <p>Observação</p>
+        <div class="function-div">
+            <p>
+                Essa função irá destruir todos os componentes contidos na janela especificada antes de destruí-la. A função irá liberar a memória usada pela janela, mas é possível encerrar a aplicação sem utilizá-la.
+            </p>
+        </div>
+    </div>
+    <h3 id="functions-static-text">Texto Estático</h3>
+    <h4 id="createStaticText">createStaticText</h4>
+        <div class="function-div">
+            <p>Protótipo</p>
+            <div class="function-div">
+                <p>StaticText createStaticText(Window window, unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned long color, char *text)</p>
+            </div>
+            <p>Parâmetros</p>
+            <ul>
+                <li>Window <b>window</b>: janela na qual o componente será colocado</li>
+                <li>unsigned int <b>x</b>: Inteiro sem sinal que representa a distância do componente em relação à esquerda da janela, em pixels</li>
+                <li>unsigned int <b>y</b>: Inteiro sem sinal que representa a distância do componente em relação ao topo da janela, em pixels</li>
+                <li>unsigned int <b>width</b>: Inteiro sem sinal que representa a largura do componente, em pixels</li>
+                <li>unsigned int <b>height</b>: Inteiro sem sinal que representa a altura do componente, em pixels</li>
+                <li>unsigned long <b>color</b>: Inteiro sem sinal que representa a cor do texto. Veja a seção de dicas para como especificar cores</li>
+                <li>char *<b>text</b>: String terminada em 0 indicando o texto a ser exibido no componente</li>
+
+            </ul>
+            <p>Retorno</p>
+            <div class="function-div">
+            <p>
+                Essa função retorna, de forma abstrata, o componente criado. O componente é essencialmente um ponteiro para uma estrutura utilizada internamente pela API. Essa referência para o componente é usada em quase todas as outras funções desse componente.
+            </p>
+            </div>
+        </div>
+    <h4 id="destroyStaticText">destroyStaticText</h4>
+        <div class="function-div">
+            <p>Protótipo</p>
+            <div class="function-div">
+                <p>void destroyStaticText(Window window, StaticText staticText)</p>
+            </div>
+            <p>Parâmetros</p>
+            <ul>
+                <li>Window <b>window</b>: Janela que contém o componente a ser destruído</li>
+                <li>StaticText <b>staticText</b>: Componente a ser destruído</li>
+            </ul>
+        </div>
+    <h4 id="setStaticText">setStaticText</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setStaticText(Window Window, StaticText staticText, char *title)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>StaticText <b>staticText</b>: Componente a ser modificado</li>
+            <li>char *<b>title</b>: Novo texto a ser exibido</li>
+        </ul>
+    </div>
+    <h4 id="setStaticTextX">setStaticTextX</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setStaticTextX(Window Window, StaticText staticText, unsigned int x)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>StaticText <b>staticText</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>x</b>: Nova posição do componente em relação à esquerda, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setStaticTextY">setStaticTextY</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setStaticTextY(Window Window, StaticText staticText, unsigned int y)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>StaticText <b>staticText</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>y</b>: Nova posição do componente em relação ao topo, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setStaticTextWidth">setStaticTextWidth</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setStaticTextWidth(Window Window, StaticText staticText, unsigned int width)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>StaticText <b>staticText</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>width</b>: Nova largura do componente, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setStaticTextHeight">setStaticTextHeight</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setStaticTextHeight(Window Window, StaticText staticText, unsigned int height)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>StaticText <b>staticText</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>height</b>: Nova altura do componente, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setStaticTextColor">setStaticTextColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setStaticTextColor(Window Window, StaticText staticText, unsigned long color)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>StaticText <b>staticText</b>: Componente a ser modificado</li>
+            <li>unsigned long <b>color</b>: Nova cor do texto do componente, em RGB</li>
+        </ul>
+    </div>
+    <h4 id="getStaticText">getStaticText</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void getStaticText(StaticText staticText, char *destination)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>StaticText <b>staticText</b>: Componente do qual obter a propriedade</li>
+            <li>char *<b>destination</b>: Variável para armazenar o texto do componente</li>
+        </ul>
+    </div>
+    <h4 id="getStaticTextX">getStaticTextX</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getStaticTextX(StaticText staticText)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>StaticText <b>staticText</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a o valor da distância da esquerda da janela, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getStaticTextY">getStaticTextY</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getStaticTextY(StaticText staticText)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>StaticText <b>staticText</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+            <p>
+                Essa função retorna a o valor da distância do topo da janela, em pixels, do componente.
+            </p>
+        </div>
+    </div>
+    <h4 id="getStaticTextWidth">getStaticTextWidth</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getStaticTextWidth(StaticText staticText)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>StaticText <b>staticText</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+            <p>
+                Essa função retorna a o valor da largura do componente.
+            </p>
+        </div>
+    </div>
+    <h4 id="getStaticTextHeight">getStaticTextHeight</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getStaticTextHeight(StaticText staticText)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>StaticText <b>staticText</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+            <p>
+                Essa função retorna a o valor da altura do componente.
+            </p>
+        </div>
+    </div>
+    <h4 id="getStaticTextColor">getStaticTextColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getStaticTextColor(StaticText staticText)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>StaticText <b>staticText</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+            <p>
+                Essa função retorna a o valor da cor do texto do componente.
+            </p>
+        </div>
+    </div>
+    <h3 id="functions-text-field">Campo de texto</h3>
+    <h4 id="createTextField">createTextField</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>TextField createTextField(Window Window, unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned long color, char *text, unsigned long textColor)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: janela na qual o componente será colocado</li>
+            <li>unsigned int <b>x</b>: Inteiro sem sinal que representa a distância do componente em relação à esquerda da janela, em pixels</li>
+            <li>unsigned int <b>y</b>: Inteiro sem sinal que representa a distância do componente em relação ao topo da janela, em pixels</li>
+            <li>unsigned int <b>width</b>: Inteiro sem sinal que representa a largura do componente, em pixels</li>
+            <li>unsigned int <b>height</b>: Inteiro sem sinal que representa a altura do componente, em pixels</li>
+            <li>unsigned long <b>color</b>: Inteiro sem sinal que representa a cor de fundo. Veja a seção de dicas para como especificar cores</li>
+            <li>char *<b>text</b>: String terminada em 0 indicando o texto inicial a ser exibido no componente</li>
+            <li>unsigned long <b>textColor</b>: Inteiro sem sinal que representa a cor do texto. Veja a seção de dicas para como especificar cores</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna, de forma abstrata, o componente criado. O componente é essencialmente um ponteiro para uma estrutura utilizada internamente pela API. Essa referência para o componente é usada em quase todas as outras funções desse componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="destroyTextField">destroyTextField</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void destroyTextField(Window window, TextField textField)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: Janela que contém o componente a ser destruído</li>
+            <li>TextField <b>textField</b>: Componente a ser destruído</li>
+        </ul>
+    </div>
+    <h4 id="setTextFieldX">setTextFieldX</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setTextFieldX(Window Window, TextField textField, unsigned int x)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>TextField <b>textField</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>x</b>: Nova posição do componente em relação à esquerda da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setTextFieldY">setTextFieldY</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setTextFieldY(Window Window, TextField textField, unsigned int y)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>TextField <b>textField</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>y</b>: Nova posição do componente em relação ao topo da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setTextFieldWidth">setTextFieldWidth</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setTextFieldWidth(Window Window, TextField textField, unsigned int width)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>TextField <b>textField</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>y</b>: Nova largura do componente, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setTextFieldHeight">setTextFieldHeight</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setTextFieldHeight(Window Window, TextField textField, unsigned int height)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>TextField <b>textField</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>y</b>: Nova altura do componente, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setTextFieldColor">setTextFieldColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setTextFieldColor(Window Window, TextField textField, unsigned long color)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>TextField <b>textField</b>: Componente a ser modificado</li>
+            <li>unsigned long <b>color</b>: Nova cor de fundo do componente, em RGB</li>
+        </ul>
+    </div>
+    <h4 id="setTextFieldText">setTextFieldText</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setTextFieldText(Window Window, TextField textField, char *text)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>TextField <b>textField</b>: Componente a ser modificado</li>
+            <li>char *<b>text</b>: Novo texto do componente</li>
+        </ul>
+    </div>
+    <h4 id="setTextFieldTextColor">setTextFieldTextColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setTextFieldTextColor(Window Window, TextField textField, unsigned long textColor)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>TextField <b>textField</b>: Componente a ser modificado</li>
+            <li>unsigned long <b>textColor</b>: Nova cor do texto do componente, em RGB</li>
+        </ul>
+    </div>
+    <h4 id="getTextFieldX">getTextFieldX</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getTextFieldX(TextField textField)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>TextField <b>textField</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a o valor da distância da esquerda da janela, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getTextFieldY">getTextFieldY</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getTextFieldY(TextField textField)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>TextField <b>textField</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a o valor da distância do topo da janela, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getTextFieldWidth">getTextFieldWidth</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getTextFieldWidth(TextField textField)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>TextField <b>textField</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna o valor da largura, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getTextFieldHeight">getTextFieldHeight</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getTextFieldHeight(TextField textField)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>TextField <b>textField</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna o valor da altura, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getTextFieldColor">getTextFieldColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned long getTextFieldColor(TextField textField)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>TextField <b>textField</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a cor de fundo, em RGB, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getTextFieldText">getTextFieldText</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void getTextFieldText(TextField textField, char *destination)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>TextField <b>textField</b>: Componente do qual obter a propriedade</li>
+            <li>char *<b>destination</b>: Variável para armazenar o texto do componente</li>
+        </ul>
+    </div>
+    <h4 id="getTextFieldTextColor">getTextFieldTextColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned long getTextFieldTextColor(TextField textField)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>TextField <b>textField</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a cor do texto, em RGB, do componente.
+        </p>
+        </div>
+    </div>
+    <h3 id="functions-button">Botão</h3>
+    <h4 id="createButton">createButton</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>Button createButton(Window Window, unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned long color, char *text, unsigned long textColor, unsigned long id)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: janela na qual o componente será colocado</li>
+            <li>unsigned int <b>x</b>: Inteiro sem sinal que representa a distância do componente em relação à esquerda da janela, em pixels</li>
+            <li>unsigned int <b>y</b>: Inteiro sem sinal que representa a distância do componente em relação ao topo da janela, em pixels</li>
+            <li>unsigned int <b>width</b>: Inteiro sem sinal que representa a largura do componente, em pixels</li>
+            <li>unsigned int <b>height</b>: Inteiro sem sinal que representa a altura do componente, em pixels</li>
+            <li>unsigned long <b>color</b>: Inteiro sem sinal que representa a cor de fundo. Veja a seção de dicas para como especificar cores</li>
+            <li>char *<b>text</b>: String terminada em 0 indicando o texto a ser exibido no componente</li>
+            <li>unsigned long <b>textColor</b>: Inteiro sem sinal que representa a cor do texto. Veja a seção de dicas para como especificar cores</li>
+            <li>unsigned long <b>id</b>: Inteiro sem sinal que é um número escolhido pelo programador para servir como identificador do botão no laço de eventos</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna, de forma abstrata, o componente criado. O componente é essencialmente um ponteiro para uma estrutura utilizada internamente pela API. Essa referência para o componente é usada em quase todas as outras funções desse componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="destroyButton">destroyButton</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void destroyButton(Window window, Button button)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: Janela que contém o componente a ser destruído</li>
+            <li>Button <b>button</b>: Componente a ser destruído</li>
+        </ul>
+    </div>
+    <h4 id="setButtonX">setButtonX</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setButtonX(Window Window, Button button, unsigned int x)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Button <b>button</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>x</b>: Nova posição do componente em relação à esquerda da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setButtonY">setButtonY</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setButtonY(Window Window, Button button, unsigned int y)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Button <b>button</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>y</b>: Nova posição do componente em relação ao topo da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setButtonWidth">setButtonWidth</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setButtonWidth(Window Window, Button button, unsigned int width)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Button <b>button</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>width</b>: Nova largura do componente, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setButtonHeight">setButtonHeight</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setButtonHeight(Window Window, Button button, unsigned int height)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Button <b>button</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>height</b>: Nova altura do componente, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setButtonColor">setButtonColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setButtonColor(Window Window, Button button, unsigned long color)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Button <b>button</b>: Componente a ser modificado</li>
+            <li>unsigned long <b>color</b>: Nova cor de fundo do componente, em RGB</li>
+        </ul>
+    </div>
+    <h4 id="setButtonText">setButtonText</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setButtonText(Button button, char *destination)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Button <b>button</b>: Componente do qual obter a propriedade</li>
+            <li>char *<b>destination</b>: Variável para armazenar o texto do componente</li>
+        </ul>
+    </div>
+    <h4 id="setButtonTextColor">setButtonTextColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setButtonTextColor(Window Window, TextField textField, unsigned long textColor)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>TextField <b>textField</b>: Componente a ser modificado</li>
+            <li>unsigned long <b>textColor</b>: Nova cor do texto do componente, em RGB</li>
+        </ul>
+    </div>
+    <h4 id="getButtonX">getButtonX</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getButtonX(Button button)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Button <b>button</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna o valor da distância da esquerda da janela, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getButtonY">getButtonY</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getButtonY(Button button)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Button <b>button</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna o valor da distância do topo da janela, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getButtonWidth">getButtonWidth</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getButtonWidth(Button button)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Button <b>button</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna o valor da largura, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getButtonHeight">getButtonHeight</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getButtonHeight(Button button)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Button <b>button</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna o valor da altura, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getButtonColor">getButtonColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned long getButtonColor(Button button)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Button <b>button</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a cor de fundo, em RGB, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getButtonText">getButtonText</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void getButtonText(TextField textField, char *destination)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>TextField <b>textField</b>: Componente do qual obter a propriedade</li>
+            <li>char *<b>destination</b>: Variável para armazenar o texto do componente</li>
+        </ul>
+    </div>
+    <h4 id="getButtonTextColor">getButtonTextColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned long getButtonTextColor(Button button)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Button <b>button</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a cor do texto, em RGB, do componente.
+        </p>
+        </div>
+    </div>
+    <h3 id="functions-rectangle">Retângulo</h3>
+    <h4 id="createRectangle">createRectangle</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>Rectangle createRectangle(Window Window, unsigned int x, unsigned int y, unsigned int width, unsigned int height, unsigned long color)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: janela na qual o componente será colocado</li>
+            <li>unsigned int <b>x</b>: Inteiro sem sinal que representa a distância do componente em relação à esquerda da janela, em pixels</li>
+            <li>unsigned int <b>y</b>: Inteiro sem sinal que representa a distância do componente em relação ao topo da janela, em pixels</li>
+            <li>unsigned int <b>width</b>: Inteiro sem sinal que representa a largura do componente, em pixels</li>
+            <li>unsigned int <b>height</b>: Inteiro sem sinal que representa a altura do componente, em pixels</li>
+            <li>unsigned long <b>color</b>: Inteiro sem sinal que representa a cor do retângulo. Veja a seção de dicas para como especificar cores</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna, de forma abstrata, o componente criado. O componente é essencialmente um ponteiro para uma estrutura utilizada internamente pela API. Essa referência para o componente é usada em quase todas as outras funções desse componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="destroyRectangle">destroyRectangle</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void destroyRectangle(Window window, Rectangle rectangle)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: Janela que contém o componente a ser destruído</li>
+            <li>Rectangle <b>rectangle</b>: Componente a ser destruído</li>
+        </ul>
+    </div>
+    <h4 id="setRectangleX">setRectangleX</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setRectangleX(Window Window, Rectangle rectangle, unsigned int x)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Rectangle <b>rectangle</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>x</b>: Nova posição do componente em relação à esquerda da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setRectangleY">setRectangleY</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setRectangleY(Window Window, Rectangle rectangle, unsigned int y)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Rectangle <b>rectangle</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>y</b>: Nova posição do componente em relação ao topo da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setRectangleWidth">setRectangleWidth</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setRectangleWidth(Window Window, Rectangle rectangle, unsigned int width)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Rectangle <b>rectangle</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>width</b>: Nova largura do componente, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setRectangleHeight">setRectangleHeight</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setRectangleHeight(Window Window, Rectangle rectangle, unsigned int height)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Rectangle <b>rectangle</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>height</b>: Nova altura do componente, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setRectangleColor">setRectangleColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setRectangleColor(Window Window, Rectangle rectangle, unsigned long color)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Rectangle <b>rectangle</b>: Componente a ser modificado</li>
+            <li>unsigned long <b>color</b>: Nova cor do componente, em RGB</li>
+        </ul>
+    </div>
+    <h4 id="getRectangleX">getRectangleX</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getRectangleX(Rectangle rectangle)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Rectangle <b>rectangle</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna o valor da distância da esquerda da janela, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getRectangleY">getRectangleY</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getRectangleY(Rectangle rectangle)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Rectangle <b>rectangle</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna o valor da distância do topo da janela, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getRectangleWidth">getRectangleWidth</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getRectangleWidth(Rectangle rectangle)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Rectangle <b>rectangle</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a largura, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getRectangleHeight">getRectangleHeight</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getRectangleHeight(Rectangle rectangle)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Rectangle <b>rectangle</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a altura, em pixels, do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getRectangleColor">getRectangleColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned long getRectangleColor(Rectangle rectangle)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Rectangle <b>rectangle</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a cor, em RGB, do componente.
+        </p>
+        </div>
+    </div>
+    <h3 id="functions-line">Linha</h3>
+    <h4 id="createLine">createLine</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>Line createLine(Window Window, int x0, int y0, int x1, int y1, unsigned long color)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: janela na qual o componente será colocado</li>
+            <li>int <b>x0</b>: Inteiro sem sinal que representa a distância do primeiro ponto da linha em relação à esquerda da janela, em pixels</li>
+            <li>int <b>y0</b>: Inteiro sem sinal que representa a distância do primeiro ponto da linha em relação ao topo da janela, em pixels</li>
+            <li>int <b>x1</b>: Inteiro sem sinal que representa a distância do segundo ponto da linha em relação à esquerda da janela, em pixels</li>
+            <li>int <b>y1</b>: Inteiro sem sinal que representa a distância do segundo ponto da linha em relação ao topo da janela, em pixels</li>
+            <li>unsigned long <b>color</b>: Inteiro sem sinal que representa a cor da linha. Veja a seção de dicas para como especificar cores</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna, de forma abstrata, o componente criado. O componente é essencialmente um ponteiro para uma estrutura utilizada internamente pela API. Essa referência para o componente é usada em quase todas as outras funções desse componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="destroyLine">destroyLine</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void destroyLine(Window window, Line line)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>window</b>: Janela que contém o componente a ser destruído</li>
+            <li>Line <b>line</b>: Componente a ser destruído</li>
+        </ul>
+    </div>
+    <h4 id="setLineX0">setLineX0</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setLineX0(Window Window, Line line, unsigned int x0)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Line <b>line</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>x0</b>: Nova posição inicial da linha em relação à esquerda da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setLineY0">setLineY0</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setLineY0(Window Window, Line line, unsigned int y0)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Line <b>line</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>y0</b>: Nova posição inicial da linha em relação ao topo da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setLineX1">setLineX1</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setLineX1(Window Window, Line line, unsigned int x1)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Line <b>line</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>x1</b>: Nova posição final da linha em relação à esquerda da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setLineY1">setLineY1</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setLineY1(Window Window, Line line, unsigned int y1)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Line <b>line</b>: Componente a ser modificado</li>
+            <li>unsigned int <b>y1</b>: Nova posição inicial da linha em relação ao topo da janela, em pixels</li>
+        </ul>
+    </div>
+    <h4 id="setLineColor">setLineColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>void setLineColor(Window Window, Line line, unsigned long color)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Window <b>Window</b>: Janela que contém o componente</li>
+            <li>Line <b>line</b>: Componente a ser modificado</li>
+            <li>unsigned long <b>color</b>: Nova cor do componente, em RGB</li>
+        </ul>
+    </div>
+    <h4 id="getLineX0">getLineX0</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getLineX0(Line line)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Line <b>line</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a distância em relação à esquerda da janela, em pixels, da posição inicial do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getLineY0">getLineY0</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getLineY0(Line line)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Line <b>line</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a distância em relação ao topo da janela, em pixels, da posição inicial do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getLineX1">getLineX1</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getLineX1(Line line)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Line <b>line</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a distância em relação à esquerda da janela, em pixels, da posição final do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getLineY1">getLineY1</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned int getLineY1(Line line)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Line <b>line</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a distância em relação ao topo da janela, em pixels, da posição final do componente.
+        </p>
+        </div>
+    </div>
+    <h4 id="getLineColor">getLineColor</h4>
+    <div class="function-div">
+        <p>Protótipo</p>
+        <div class="function-div">
+            <p>unsigned long getLineColor(Line line)</p>
+        </div>
+        <p>Parâmetros</p>
+        <ul>
+            <li>Line <b>line</b>: Componente do qual obter a propriedade</li>
+        </ul>
+        <p>Retorno</p>
+        <div class="function-div">
+        <p>
+            Essa função retorna a cor, em RGB, do componente.
+        </p>
+        </div>
+    </div>
+</div>
+    </div>
+    <script>
+        document.getElementById('content').style.setProperty('margin-left', document.querySelector('#summary>ul').clientWidth + 64 + 'px')
+    </script>
+</body>
+
+</html>
