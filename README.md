@@ -12,7 +12,7 @@ Para compilar o seu programa, você precisará informar opções adicionais (fla
 
 Em Windows, adicione a flag -mwindows
 
-Por exemplo, ``gcc main.c API.lib -mwindows``
+Por exemplo, ``gcc main.c API.lib -mwindows -lgdi32``
 
 Em Linux, adicione a flag -lX11
 
