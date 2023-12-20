@@ -10,7 +10,7 @@ Em seu programa, inclua o header API.h. Lembre de utilizar aspas duplas, ou seja
 
 Para compilar o seu programa, você precisará informar opções adicionais (flags) ao compilador.
 
-Em Windows, adicione a flag -mwindows
+Em Windows, adicione a flag -mwindows e a flag -lgdi32
 
 Por exemplo, ``gcc main.c API.lib -mwindows -lgdi32``
 
